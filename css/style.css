@@ -39,6 +39,29 @@ h1 {
   padding-bottom: .1rem;
 }
 
+.button-primary {
+  font-size: 1.4rem;
+  font-weight: 450;
+  border-radius: .5rem;
+  padding: 1.3rem;
+  padding-left: 1.6rem;
+  padding-right: 1.6rem;
+  color: #ffffff;
+  background-color: #901c1c;
+  border: none;
+}
+
+.button-primary:hover, .button-primary :focus {
+  background-color: #da8876;
+  color: #000000;
+  cursor: pointer;
+}
+
+.button-primary--modal:hover, .button-primary--modal :focus {
+  background-color: #FAFAFA;
+  color: #525252;
+}
+
 body {
   display: -ms-grid;
   display: grid;
@@ -111,7 +134,7 @@ main {
 }
 
 .photographer-portrait__name {
-  color: #bf5138;
+  color: #bf5037;
   font-size: 3rem;
   font-weight: 400;
   padding: .2rem;
@@ -119,7 +142,7 @@ main {
 }
 
 .photographer-portrait__location {
-  color: #bf5138;
+  color: #bf5037;
   font-size: 1.2rem;
   margin: .1rem;
   margin-top: -.7rem;

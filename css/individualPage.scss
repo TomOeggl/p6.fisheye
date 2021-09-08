@@ -1,7 +1,8 @@
 @import "./utils/variables.scss";
 @import "./base/typography.scss";
 @import "./components/buttonsAndLinks.scss";
-@import "./components/dropdown";
+@import "./components/dropdown.scss";
+@import "./components/modal.scss";
 
 body {
   display: grid;
@@ -64,8 +65,9 @@ main {
   min-height: max-content;
 
   display: grid;
-  grid-template-columns: 2fr 1fr 200px;
-  grid-template-areas: "t . p";
+  
+  grid-template-columns: subgrid;
+  grid-template-areas: "t b p";
 
   &__textcontainer {
     grid-area: t;
@@ -73,20 +75,6 @@ main {
     align-self: center;
   }
 
-  &__image {
-    -o-object-fit: cover;
-    object-fit: cover;
-    width: 25vh;
-    height: 25vh;
-    border-radius: 50%;
-    grid-area: p;
-    justify-self: right;
-    margin: 2rem;
-    align-self: center;
-    margin-right: 4rem;
-
-    box-shadow: 2px 2px 4px 6px rgb(242, 242, 242);
-  }
   &__name {
     color: $primaryLightText;
     font-size: 6rem;
@@ -110,6 +98,29 @@ main {
     margin-top: 4rem;
     margin-left: 0.6rem;
   }
+
+  &__buttoncontainer{
+    grid-area: b;
+  }
+
+  &__image {
+    -o-object-fit: cover;
+    object-fit: cover;
+    width: 25vh;
+    height: 25vh;
+    border-radius: 50%;
+    grid-area: p;
+    justify-self: right;
+    margin: 2rem;
+    align-self: center;
+    margin-right: 4rem;
+
+    box-shadow: 2px 2px 4px 6px rgb(242, 242, 242);
+  }
+}
+
+#contact-btn{
+  margin-top: 5rem;
 }
 
 .order-by {

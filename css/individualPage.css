@@ -39,6 +39,29 @@ h1 {
   padding-bottom: .1rem;
 }
 
+.button-primary {
+  font-size: 1.4rem;
+  font-weight: 450;
+  border-radius: .5rem;
+  padding: 1.3rem;
+  padding-left: 1.6rem;
+  padding-right: 1.6rem;
+  color: #ffffff;
+  background-color: #901c1c;
+  border: none;
+}
+
+.button-primary:hover, .button-primary :focus {
+  background-color: #da8876;
+  color: #000000;
+  cursor: pointer;
+}
+
+.button-primary--modal:hover, .button-primary--modal :focus {
+  background-color: #FAFAFA;
+  color: #525252;
+}
+
 /* Dropdown Button */
 .dropbtn {
   background-color: #901c1c;
@@ -86,6 +109,98 @@ h1 {
 .dropdown:hover .dropbtn {
   background-color: #901c1c;
   color: white;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: black;
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
+  /* Modal Content/Box */
+}
+
+.modal__content {
+  background-color: #da8876;
+  margin: 15% auto;
+  /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 30%;
+  /* Could be more or less, depending on screen size */
+  border-radius: .5rem;
+}
+
+.modal__title {
+  font-size: 3rem;
+  position: top;
+  padding-top: 0rem;
+  margin-top: 0rem;
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  float: right;
+  font-size: 5rem;
+  font-weight: 300;
+  margin-top: -2rem;
+}
+
+.close:hover,
+.close :focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#modal__title {
+  color: black;
+}
+
+.formData {
+  font-size: 2rem;
+  font-weight: 400;
+  line-height: 3.3rem;
+  margin-bottom: 0rem;
+}
+
+.text-control {
+  padding: .6rem;
+  font-size: 1.6rem;
+  font-weight: 350;
+  width: calc(100% - 2rem);
+  border-radius: .5rem;
+  border: none;
+  margin-top: -1rem;
+}
+
+#text-message {
+  padding: .6rem;
+  font-size: 1.5rem;
+  font-weight: 300;
+  width: calc(100% - 2rem);
+  border-radius: .5rem;
+  border: none;
+  height: 8rem;
+}
+
+textarea {
+  font-weight: lighter;
 }
 
 body {
@@ -153,8 +268,8 @@ main {
   min-height: max-content;
   display: -ms-grid;
   display: grid;
-      grid-template-columns: 2fr 1fr 200px;
-      grid-template-areas: "t . p";
+      grid-template-columns: subgrid;
+      grid-template-areas: "t b p";
 }
 
 .photographer-pageheader__textcontainer {
@@ -167,28 +282,8 @@ main {
       align-self: center;
 }
 
-.photographer-pageheader__image {
-  -o-object-fit: cover;
-  object-fit: cover;
-  width: 25vh;
-  height: 25vh;
-  border-radius: 50%;
-  -ms-grid-row: 1;
-  -ms-grid-column: 3;
-  grid-area: p;
-  -ms-grid-column-align: right;
-      justify-self: right;
-  margin: 2rem;
-  -ms-flex-item-align: center;
-      -ms-grid-row-align: center;
-      align-self: center;
-  margin-right: 4rem;
-  -webkit-box-shadow: 2px 2px 4px 6px #f2f2f2;
-          box-shadow: 2px 2px 4px 6px #f2f2f2;
-}
-
 .photographer-pageheader__name {
-  color: #bf5138;
+  color: #bf5037;
   font-size: 6rem;
   font-weight: 400;
   padding: 0.3rem;
@@ -212,6 +307,36 @@ main {
 .photographer-pageheader__hashtagcontainer {
   margin-top: 4rem;
   margin-left: 0.6rem;
+}
+
+.photographer-pageheader__buttoncontainer {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: b;
+}
+
+.photographer-pageheader__image {
+  -o-object-fit: cover;
+  object-fit: cover;
+  width: 25vh;
+  height: 25vh;
+  border-radius: 50%;
+  -ms-grid-row: 1;
+  -ms-grid-column: 3;
+  grid-area: p;
+  -ms-grid-column-align: right;
+      justify-self: right;
+  margin: 2rem;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  margin-right: 4rem;
+  -webkit-box-shadow: 2px 2px 4px 6px #f2f2f2;
+          box-shadow: 2px 2px 4px 6px #f2f2f2;
+}
+
+#contact-btn {
+  margin-top: 5rem;
 }
 
 .order-by {

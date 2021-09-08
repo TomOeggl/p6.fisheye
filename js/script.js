@@ -366,3 +366,56 @@ body.addEventListener("click", (event) => {
     }
   }
 });
+
+
+
+//----------------------------------------
+//------- MODAL SCRIPT -------------------
+//----------------------------------------
+
+// Get the modal
+var modal = document.getElementById("contactModal");
+// Get the form and reset on reload
+var contactForm = document.getElementById("contact-form");
+contactForm.reset();
+
+function handleForm(event) { event.preventDefault(); } 
+contactForm.addEventListener('submit', handleForm);
+
+// Get the button that opens the modal
+var btn = document.getElementById("contact-btn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+  modal.style.display = "block";
+  console.log("click on btn logged");
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+} 
+
+// Get send button and form data
+var submitMessage = document.getElementById("submit");
+var firstName = document.getElementById("first");
+var lastName = document.getElementById("last");
+var email = document.getElementById("email");
+var textMessage = document.getElementById("text-message");
+function logMessageToConsole() {
+  console.log(firstName.value + " " + lastName.value + " with email adress " + email.value + " sent you following message: " + textMessage.value);
+  contactForm.reset();
+  modal.style.display = "none";
+}
+
+

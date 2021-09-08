@@ -66,6 +66,71 @@
             >
           </span>
         </div>
+        <div class="photographer-pageheader__buttoncontainer">
+          <button id="contact-btn" class="button-primary">Contact me</button>
+        </div>
+        <div id="contactModal" class="modal">
+          <!-- Modal content -->
+          <div class="modal__content">
+            <span class="close">&times;</span>
+            <h1 class="modal__title" id="modal__title">Contact 
+              <br>Mimi Keel</h1>
+            <form name="contact" id="contact-form" action="243.html" method="get" onsubmit="logMessageToConsole(); return false">
+              <div
+                class="formData">
+                <label>First Name</label><br>
+                <input
+                  class="text-control"
+                  type="text"
+                  id="first"
+                  name="first"
+                  minlength="2"
+                  required
+                  oninvalid="this.setCustomValidity('')"
+                /><br>
+              </div>
+              <div
+                class="formData">
+                <label>Last Name</label><br>
+                <input
+                  class="text-control"
+                  type="text"
+                  id="last"
+                  name="last"
+                  minlength="2"
+                  required
+                  oninvalid="this.setCustomValidity('')"
+                /><br>
+              </div>
+              <div
+                class="formData">
+                <label>Email</label><br>
+                <input
+                  class="text-control"
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                /><br>
+              </div>
+              <div
+                class="formData">
+                <label>Your message</label><br>
+                <textarea id="text-message" rows="4" cols="60">
+                
+                  </textarea>
+                  <br>
+              </div>
+              <input
+                class="btn-submit button-primary button-primary--modal"
+                type="submit"
+                id="submit"
+                value="   Send    "
+              />
+            </form>
+          </div>
+        </div>
+        
         <img
           class="photographer-pageheader__image"
           src="files/media/Photographers_ID_Photos/MimiKeel.jpg"
@@ -85,7 +150,7 @@
         </div>
       </div>
       <section class="media-gallery">
-       <!-- DUMMY MEDIA ITEM 
+        <!-- DUMMY MEDIA ITEM 
         <div class="media-item">
           <a href="#img" class="media-item__imagelink">
             <img
@@ -113,8 +178,7 @@
             <p class="media-item__likes">9 <i class="fas fa-heart"></i></p>
           </div>
         </div>
-      -->
-      </section>
+      --></section>
 
       <!--   DUMMY HTML STRUCTURE for mirroring in javascript
     <section class="photographer-portrait">
@@ -138,6 +202,8 @@
         </span>
     </section>
   -->
+  <!-- The Modal -->
+  
     </main>
     <script src="js/script.js"></script>
   </body>
