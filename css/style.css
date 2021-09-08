@@ -3,4 +3,138 @@ a {
   text-decoration: none;
   color: black;
 }
+
+body {
+  font-family: "Open Sans", sans-serif;
+}
+
+h1 {
+  color: #901c1c;
+  font-size: 3.5rem;
+  font-weight: 400;
+}
+
+.hashtag {
+  font-size: .9rem;
+  color: #901c1c;
+  border: 1px solid lightgray;
+  border-radius: .7rem;
+  padding: .3rem;
+  padding-top: .2rem;
+  padding-bottom: .2rem;
+  margin-right: .3rem;
+}
+
+.hashtag:hover, .hashtag:focus {
+  color: #ffffff;
+  background-color: #901c1c;
+  border-color: #901c1c;
+}
+
+.hashtag--photographer-pageheader {
+  font-size: 1.3rem;
+  border-radius: .9rem;
+  padding: .8rem;
+  padding-top: .1rem;
+  padding-bottom: .1rem;
+}
+
+body {
+  display: -ms-grid;
+  display: grid;
+  min-height: 100vh;
+  -ms-grid-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
+  -ms-grid-rows: 1fr 2fr 2fr;
+      grid-template-rows: 1fr 2fr 2fr;
+      grid-template-areas: "h h h " "m m m" "m m m";
+}
+
+header {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 3;
+  grid-area: h;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
+  -ms-grid-rows: 100px;
+      grid-template-rows: 100px;
+}
+
+.header-link__image {
+  margin-top: 2rem;
+  margin-left: 8vw;
+  -ms-grid-column: 1;
+      grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+nav {
+  -ms-flex-item-align: end;
+      -ms-grid-row-align: end;
+      align-self: end;
+}
+
+main {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 3;
+  grid-area: m;
+  -ms-grid-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
+  place-content: stretch / stretch;
+}
+
+.photographer-portrait {
+  -ms-grid-column-align: center;
+      justify-self: center;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  text-align: center;
+}
+
+.photographer-portrait__image {
+  -o-object-fit: cover;
+  object-fit: cover;
+  width: 17vh;
+  height: 17vh;
+  border-radius: 50%;
+  float: top;
+  -webkit-box-shadow: 2px 2px 4px 6px #f2f2f2;
+          box-shadow: 2px 2px 4px 6px #f2f2f2;
+}
+
+.photographer-portrait__name {
+  color: #bf5138;
+  font-size: 3rem;
+  font-weight: 400;
+  padding: .2rem;
+  margin: 0.2rem;
+}
+
+.photographer-portrait__location {
+  color: #bf5138;
+  font-size: 1.2rem;
+  margin: .1rem;
+  margin-top: -.7rem;
+}
+
+.photographer-portrait__tagline {
+  font-size: .9rem;
+  margin: .1rem;
+}
+
+.photographer-portrait__price {
+  color: #525252;
+  font-size: .9rem;
+  margin: .1rem;
+  font-style: italic;
+  margin-bottom: .5rem;
+}
 /*# sourceMappingURL=style.css.map */

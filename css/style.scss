@@ -1,2 +1,105 @@
 @import "./utils/variables.scss";
 @import "./base/typography.scss";
+@import "./components/buttonsAndLinks.scss";
+
+
+body{
+    display: grid;
+    min-height: 100vh;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows:    1fr 2fr 2fr;
+    grid-template-areas:    "h h h "
+                            "m m m"
+                            "m m m";
+}
+
+header{
+    grid-area: h;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 100px;
+    //border: 2px solid black;
+}
+
+.header-link__image{
+    margin-top: 2rem;
+    margin-left: 8vw;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    
+}
+
+nav{
+    //border: 2px solid red;
+    align-self: end;
+    
+}
+
+//-------------------------
+//Parent node/container for subgrid of photographer portrait class generated with js
+
+main{
+    
+    display: grid;
+    grid-area: m;
+    grid-template-columns: 1fr 1fr 1fr;
+    place-content: stretch / stretch;
+
+}
+
+//-------------------------
+//Photographer Portrait Styles <--> html section for grid <--> js photographer object  
+
+.photographer-portrait{
+    justify-self: center;
+    align-self: center;
+    text-align: center;
+    &__image{
+        -o-object-fit: cover;
+        object-fit: cover;
+        width: 17vh;
+        height: 17vh;
+        border-radius: 50%;
+        float: top;
+        box-shadow: 2px 2px 4px 6px rgb(242, 242, 242);
+    }
+    &__name{
+        color: $primaryLightText;
+        font-size: 3rem;
+        font-weight: 400;
+        padding: .2rem;
+        margin: 0.2rem;
+
+        
+    }
+    &__location{
+        color: $primaryLightText;
+        font-size: 1.2rem;
+        margin: .1rem;
+        
+        margin-top: -.7rem;
+    }
+    &__tagline{
+        
+        font-size: .9rem;
+        margin: .1rem;
+        
+        
+        
+    }
+    &__price{
+        color: $secondaryLightText;
+        font-size: .9rem;
+        margin: .1rem;
+        font-style: italic;
+        margin-bottom: .5rem;
+        
+    }
+    
+    
+}
+
+
+
+
+

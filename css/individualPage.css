@@ -1,0 +1,299 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,800;1,300&display=swap");
+a {
+  text-decoration: none;
+  color: black;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+}
+
+h1 {
+  color: #901c1c;
+  font-size: 3.5rem;
+  font-weight: 400;
+}
+
+.hashtag {
+  font-size: .9rem;
+  color: #901c1c;
+  border: 1px solid lightgray;
+  border-radius: .7rem;
+  padding: .3rem;
+  padding-top: .2rem;
+  padding-bottom: .2rem;
+  margin-right: .3rem;
+}
+
+.hashtag:hover, .hashtag:focus {
+  color: #ffffff;
+  background-color: #901c1c;
+  border-color: #901c1c;
+}
+
+.hashtag--photographer-pageheader {
+  font-size: 1.3rem;
+  border-radius: .9rem;
+  padding: .8rem;
+  padding-top: .1rem;
+  padding-bottom: .1rem;
+}
+
+/* Dropdown Button */
+.dropbtn {
+  background-color: #901c1c;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border-radius: .3rem;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #901c1c;
+  color: white;
+  min-width: 160px;
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #901c1c;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+  background-color: #901c1c;
+  color: white;
+}
+
+body {
+  display: -ms-grid;
+  display: grid;
+  min-height: 100vh;
+  width: 95%;
+  margin: auto;
+  -ms-grid-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
+  -ms-grid-rows: auto;
+      grid-template-rows: auto;
+      grid-template-areas: "h h h " "m m m" "m m m";
+}
+
+header {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 3;
+  grid-area: h;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
+  -ms-grid-rows: 180px;
+      grid-template-rows: 180px;
+}
+
+.header-link__image {
+  margin-top: 2rem;
+  margin-left: -1rem;
+  -ms-grid-column: 1;
+      grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+main {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 3;
+  grid-area: m;
+  -ms-grid-columns: subgrid;
+      grid-template-columns: subgrid;
+  -ms-grid-rows: (minmax(max-content, 1fr))[auto-fit];
+      grid-template-rows: repeat(auto-fit, minmax(-webkit-max-content, 1fr));
+      grid-template-rows: repeat(auto-fit, minmax(max-content, 1fr));
+      grid-template-areas: "p p p " "o . ." "c c c" "c c c";
+  max-height: -webkit-max-content;
+  max-height: -moz-max-content;
+  max-height: max-content;
+}
+
+.photographer-pageheader {
+  background-color: #FAFAFA;
+  border-radius: 0.5rem;
+  -ms-grid-row: 1;
+  -ms-grid-column: 3;
+  grid-area: p;
+      align-self: center;
+  min-height: -webkit-max-content;
+  min-height: -moz-max-content;
+  min-height: max-content;
+  display: -ms-grid;
+  display: grid;
+      grid-template-columns: 2fr 1fr 200px;
+      grid-template-areas: "t . p";
+}
+
+.photographer-pageheader__textcontainer {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: t;
+  margin: 2rem;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+.photographer-pageheader__image {
+  -o-object-fit: cover;
+  object-fit: cover;
+  width: 25vh;
+  height: 25vh;
+  border-radius: 50%;
+  -ms-grid-row: 1;
+  -ms-grid-column: 3;
+  grid-area: p;
+  -ms-grid-column-align: right;
+      justify-self: right;
+  margin: 2rem;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  margin-right: 4rem;
+  -webkit-box-shadow: 2px 2px 4px 6px #f2f2f2;
+          box-shadow: 2px 2px 4px 6px #f2f2f2;
+}
+
+.photographer-pageheader__name {
+  color: #bf5138;
+  font-size: 6rem;
+  font-weight: 400;
+  padding: 0.3rem;
+  margin: 0.3rem;
+}
+
+.photographer-pageheader__location {
+  color: #901c1c;
+  font-size: 2.4rem;
+  margin: 0.6rem;
+  margin-top: 1rem;
+}
+
+.photographer-pageheader__tagline {
+  font-size: 2rem;
+  margin: 0.6rem;
+  font-weight: 350;
+  margin-bottom: 2rem;
+}
+
+.photographer-pageheader__hashtagcontainer {
+  margin-top: 4rem;
+  margin-left: 0.6rem;
+}
+
+.order-by {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: o;
+  padding-top: 2rem;
+  padding-bottom: 5rem;
+}
+
+.order-by__label {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.media-gallery {
+  -ms-grid-row: 3;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 3;
+  grid-area: c;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: subgrid;
+      grid-template-columns: subgrid;
+  -ms-grid-rows: auto;
+      grid-template-rows: auto;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 1vw 6vw;
+}
+
+.media-item {
+  -ms-grid-column-align: center;
+      justify-self: center;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  -ms-grid-column-align: stretch;
+      justify-self: stretch;
+}
+
+.media-item__image {
+  -o-object-fit: cover;
+  object-fit: cover;
+  width: 27.2vw;
+  height: 22.5vw;
+  border-radius: 0.6rem;
+  -webkit-box-shadow: 2px 2px 4px 6px #f9f8f8;
+          box-shadow: 2px 2px 4px 6px #f9f8f8;
+}
+
+.media-item__textcontent {
+  display: inline;
+}
+
+.media-item__title {
+  color: #901c1c;
+  font-size: 1.5rem;
+  text-align: left;
+  display: inline;
+  float: left;
+  margin-top: 0.5rem;
+}
+
+.media-item__likes {
+  color: #901c1c;
+  font-size: 1.5rem;
+  text-align: right;
+  display: inline;
+  float: right;
+  margin-top: 0.5rem;
+}
+
+video {
+  -o-object-fit: cover;
+  object-fit: cover;
+  width: 27.2vw;
+  height: 22.5vw;
+  border-radius: 0.6rem;
+  -webkit-box-shadow: 2px 2px 4px 6px #f9f8f8;
+          box-shadow: 2px 2px 4px 6px #f9f8f8;
+}
+/*# sourceMappingURL=individualPage.css.map */

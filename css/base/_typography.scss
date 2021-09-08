@@ -8,4 +8,12 @@ a {
     color: black;
   }
 
-  
+body{
+  font-family: "Open Sans", sans-serif;
+}
+
+h1{
+  color: $primaryFill;
+  font-size: 3.5rem;
+  font-weight: 400;
+}

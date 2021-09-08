@@ -1,0 +1,179 @@
+@import "./utils/variables.scss";
+@import "./base/typography.scss";
+@import "./components/buttonsAndLinks.scss";
+@import "./components/dropdown";
+
+body {
+  display: grid;
+  min-height: 100vh;
+  width: 95%;
+  margin: auto;
+  grid-template-columns: 1fr 1fr 1fr;
+  //grid-template-rows: 150px 2fr 2fr;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "h h h "
+    "m m m"
+    "m m m";
+}
+
+header {
+  grid-area: h;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 180px;
+  //border: 2px solid black;
+}
+
+.header-link {
+  //padding: 2rem;
+}
+
+.header-link__image {
+  margin-top: 2rem;
+  margin-left: -1rem;
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+//-------------------------
+//Parent node/container for subgrid of photographer portrait class generated with js !!! for index hmtl -- change
+
+main {
+  display: grid;
+  grid-area: m;
+  grid-template-columns: subgrid;
+  grid-template-rows: repeat(auto-fit, minmax(max-content, 1fr));
+  grid-template-areas:
+    "p p p "
+    "o . ."
+    "c c c"
+    "c c c";
+  //place-content: stretch / stretch;
+  max-height: max-content;
+}
+
+//-------------------------
+//Photographer Portrait Styles <--> html section for grid <--> js photographer object
+
+.photographer-pageheader {
+  background-color: $secondaryLightFill;
+  border-radius: 0.5rem;
+  grid-area: p;
+  align-self: center;
+  min-height: max-content;
+
+  display: grid;
+  grid-template-columns: 2fr 1fr 200px;
+  grid-template-areas: "t . p";
+
+  &__textcontainer {
+    grid-area: t;
+    margin: 2rem;
+    align-self: center;
+  }
+
+  &__image {
+    -o-object-fit: cover;
+    object-fit: cover;
+    width: 25vh;
+    height: 25vh;
+    border-radius: 50%;
+    grid-area: p;
+    justify-self: right;
+    margin: 2rem;
+    align-self: center;
+    margin-right: 4rem;
+
+    box-shadow: 2px 2px 4px 6px rgb(242, 242, 242);
+  }
+  &__name {
+    color: $primaryLightText;
+    font-size: 6rem;
+    font-weight: 400;
+    padding: 0.3rem;
+    margin: 0.3rem;
+  }
+  &__location {
+    color: $primaryFill;
+    font-size: 2.4rem;
+    margin: 0.6rem;
+    margin-top: 1rem;
+  }
+  &__tagline {
+    font-size: 2rem;
+    margin: 0.6rem;
+    font-weight: 350;
+    margin-bottom: 2rem;
+  }
+  &__hashtagcontainer {
+    margin-top: 4rem;
+    margin-left: 0.6rem;
+  }
+}
+
+.order-by {
+  grid-area: o;
+  padding-top: 2rem;
+  padding-bottom: 5rem;
+  &__label {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+}
+
+.media-gallery {
+  grid-area: c;
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-template-rows: auto;
+  justify-content: center;
+  gap: 1vw 6vw;
+}
+
+.media-item {
+  justify-self: center;
+    //align-self: center;
+    width: max-content;
+    justify-self: stretch;
+    //border: 2px solid black;
+  &__imagelink {
+    
+  }
+  &__image {
+    -o-object-fit: cover;
+    object-fit: cover;
+    width: 27.2vw;
+    height: 22.5vw;
+    border-radius: 0.6rem;
+    box-shadow: 2px 2px 4px 6px rgb(249, 248, 248);
+  }
+  &__textcontent {
+    display: inline;
+  }
+  &__title {
+    color: $primaryFill;
+    font-size: 1.5rem;
+    text-align: left;
+    display: inline;
+    float: left;
+    margin-top: 0.5rem;
+  }
+  &__likes {
+    color: $primaryFill;
+    font-size: 1.5rem;
+    text-align: right;
+    display: inline;
+    float: right;
+    margin-top: 0.5rem;
+  }
+}
+
+video {
+  -o-object-fit: cover;
+    object-fit: cover;
+    width: 27.2vw;
+    height: 22.5vw;
+    border-radius: 0.6rem;
+    box-shadow: 2px 2px 4px 6px rgb(249, 248, 248);
+}
