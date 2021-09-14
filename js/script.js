@@ -5,6 +5,7 @@ var photographers = [];
 var mediaArray = [];
 var photographersFilteredByTag = [];
 var mediaFilteredByPhotographer = [];
+var subpageMediaFilteredByTag = [];
 const body = document.querySelector("body");
 var path = window.location.pathname;
 var page = path.split("/").pop();
@@ -141,7 +142,7 @@ var Factory = function () {
 
     mediaItem.populateDom = function () {
       var extraThis = this;
-      
+
       console.log("Entered Populate DOM Method of item " + extraThis.id);
 
       //create DOM ELEMENTS
@@ -157,7 +158,6 @@ var Factory = function () {
 
       if (extraThis.image !== undefined) {
         htmlMediaItem = document.createElement("img");
-        
       } else {
         htmlMediaItem = document.createElement("video");
         //htmlMediaItemSource = document.createElement("source");
@@ -165,36 +165,39 @@ var Factory = function () {
         //  "files/media/" + extraThis.photographerId + "/" + extraThis.video;
         console.log("hmtl Video item created");
         console.log(htmlMediaItem);
-        
       }
-      
+
       //console.log(htmlMediaItem);
       //assign Classes to DOM ELEMENTS
       htmlMediaItemContainer.classList.add("media-item");
       htmlMediaItemImageLink.classList.add("media-item__imagelink");
-      if (extraThis.image !== undefined){
-      htmlMediaItem.classList.add("media-item__image");
+      if (extraThis.image !== undefined) {
+        htmlMediaItem.classList.add("media-item__image");
       }
       htmlMediaItemTextContainer.classList.add("media-item__text-content");
       htmlMediaItemTextTitle.classList.add("media-item__title");
       htmlMediaItemTextLikes.classList.add("media-item__likes");
       htmlMediaItemTextHeartIcon.classList.add("fa-heart");
       htmlMediaItemTextHeartIcon.classList.add("fas");
-      
+
       //add Content from Media Object
       if (extraThis.image !== undefined) {
         htmlMediaItem.src =
           "files/media/" + extraThis.photographerId + "/" + extraThis.image;
-          console.log("Entered Image Content branch")
+        console.log("Entered Image Content branch");
+        htmlMediaItem.title = extraThis.title;
       } else {
         htmlMediaItem.src =
           "files/media/" + extraThis.photographerId + "/" + extraThis.video;
         //htmlMediaItemImage.appendChild(htmlMediaItemImageSource);
-        console.log("files/media/" + extraThis.photographerId + "/" + extraThis.video);
-        
+        console.log(
+          "files/media/" + extraThis.photographerId + "/" + extraThis.video
+        );
+        htmlMediaItem.title = extraThis.title;
       }
       htmlMediaItemTextTitle.textContent = extraThis.title;
       htmlMediaItemTextLikes.textContent = extraThis.likes + " ";
+      htmlMediaItemImageLink.href = "#" + extraThis.id;
 
       //APPEND to DOM Parent Node
       parentNode.appendChild(htmlMediaItemContainer);
@@ -204,6 +207,13 @@ var Factory = function () {
       htmlMediaItemTextContainer.appendChild(htmlMediaItemTextTitle);
       htmlMediaItemTextContainer.appendChild(htmlMediaItemTextLikes);
       htmlMediaItemTextLikes.appendChild(htmlMediaItemTextHeartIcon);
+    };
+
+    mediaItem.removeFromDom = function () {
+      let myNode = document.getElementById("media-gallery");
+      while (myNode.firstChild) {
+        myNode.removeChild(myNode.lastChild);
+      }
     };
 
     return mediaItem;
@@ -291,11 +301,61 @@ function filterMediaByPhotographer(photographerPageId) {
   }
 }
 
+function filterSubpageMediaByTag(tag) {
+  //make sure the filtered array is empty before we start
+  subpageMediaFilteredByTag.splice(0, subpageMediaFilteredByTag.length);
+  //returns index of -1 if not found in array and pushes it to filtered array otherwise
+  for (var i = 0, len = mediaFilteredByPhotographer.length; i < len; i++) {
+    if (mediaFilteredByPhotographer[i].tags.indexOf(tag) !== -1) {
+      subpageMediaFilteredByTag.push(mediaFilteredByPhotographer[i]);
+    }
+  }
+  console.log(subpageMediaFilteredByTag);
+}
+//-----------------------------------
+//-------LIGHTBOX FUNCTIONS----------
+//-----------------------------------
+function changeLightboxItem(direction){
+  console.log(lightboxImage.src);
+  let currentImageSource = lightboxImage.src;
+  let currentMediaArray = Array.from(document.getElementById('media-gallery').children);
+  console.log(currentMediaArray[0].firstChild.firstChild.src);
+  let currentIndex = currentMediaArray.map(function (e) {
+    return e.firstChild.firstChild.src;
+  })
+  .indexOf(currentImageSource);
+
+  if(direction === "next"){
+    let nextIndex = currentIndex + 1;
+    if(nextIndex >= currentMediaArray.length){
+      nextIndex = 0;
+    }
+    lightboxImage.src = currentMediaArray[nextIndex].firstChild.firstChild.src;
+    
+  }
+
+  if(direction === "previous"){
+    let nextIndex = currentIndex - 1;
+    if(nextIndex < 0){
+      nextIndex = currentMediaArray.length - 1;
+    }
+    lightboxImage.src = currentMediaArray[nextIndex].firstChild.firstChild.src;
+    
+  }
+  
+
+  console.log(currentIndex);
+}
+
 //readJsonMedia();
 
 //-----------------------------------
 
-// ACTUAL CALLING SEQUENCE TO parse data and then fill the HOMEPAGE
+// ACTUAL CALLING SEQUENCE TO parse data and then fill the INDEX PAGE OR SUBPAGES BELOW
+
+//-----------------------------------
+
+
 readJsonPhotographers().then(() => {
   if (
     page === "243.html" ||
@@ -323,7 +383,7 @@ readJsonPhotographers().then(() => {
 });
 
 //-----------------------------
-// GLOBAL EVENT LISTENER FOR FILTERING BY TAGS
+// GLOBAL EVENT LISTENER 
 
 // add global event listener, check for click events of hashtag class for filtering
 body.addEventListener("click", (event) => {
@@ -336,8 +396,48 @@ body.addEventListener("click", (event) => {
     page === "925.html" ||
     page === "195.html"
   ) {
-    //subpage routine comes here
+    //----------------------------------------
+    //----------- SUBPAGE LISTENER BELOW------
+    //----------------------------------------
+    //LIGHTBOX EVENT ROUTINE
+    if (event.target.classList.contains("media-item__image")) {
+      let lightboxTarget = event.target.src;
+      let imageTitle = event.target.title;
+      /*let currentIndex = Array.from(document.getElementById('media-gallery').children)
+        .map(function (e) {
+          return e.title;
+        })
+        .indexOf(imageTitle);
+      changeLightbox(nextItem(currentIndex));*/
+
+      lightbox.style.display = "block";
+      lightboxImage.src = lightboxTarget;
+      lightboxTitle.textContent = event.target.title;
+    }
+    //--------------   FILTER SUBPAGE MEDIA ITEMS by hashtag
+    else if (event.target.classList.contains("hashtag")) {
+      //remove # symbol from string
+      let actualTag = event.target.textContent.substring(1);
+      //filter by tag
+      filterSubpageMediaByTag(actualTag);
+      console.log(mediaFilteredByPhotographer);
+      mediaFilteredByPhotographer.forEach((element) => element.removeFromDom());
+      console.log(mediaFilteredByPhotographer);
+      if (actualTag === "all") {
+        mediaFilteredByPhotographer.forEach((element) =>
+          element.populateDom("homepagePortrait")
+        );
+      } else {
+        subpageMediaFilteredByTag.forEach((element) =>
+          element.populateDom("homepagePortrait")
+        );
+      }
+    }
+    //----------------------------------------
+    //-------------- INDEX PAGE LISTENER BELOW
+    //----------------------------------------
   } else {
+    // index page photographer filtering by hashtag below
     if (event.target.classList.contains("hashtag")) {
       //remove # symbol from string
       let actualTag = event.target.textContent.substring(1);
@@ -367,8 +467,6 @@ body.addEventListener("click", (event) => {
   }
 });
 
-
-
 //----------------------------------------
 //------- MODAL SCRIPT -------------------
 //----------------------------------------
@@ -379,8 +477,10 @@ var modal = document.getElementById("contactModal");
 var contactForm = document.getElementById("contact-form");
 contactForm.reset();
 
-function handleForm(event) { event.preventDefault(); } 
-contactForm.addEventListener('submit', handleForm);
+function handleForm(event) {
+  event.preventDefault();
+}
+contactForm.addEventListener("submit", handleForm);
 
 // Get the button that opens the modal
 var btn = document.getElementById("contact-btn");
@@ -389,22 +489,22 @@ var btn = document.getElementById("contact-btn");
 var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks on the button, open the modal
-btn.onclick = function() {
+btn.onclick = function () {
   modal.style.display = "block";
   console.log("click on btn logged");
-}
+};
 
 // When the user clicks on <span> (x), close the modal
-span.onclick = function() {
+span.onclick = function () {
   modal.style.display = "none";
-}
+};
 
 // When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
+window.onclick = function (event) {
   if (event.target == modal) {
     modal.style.display = "none";
   }
-} 
+};
 
 // Get send button and form data
 var submitMessage = document.getElementById("submit");
@@ -412,10 +512,59 @@ var firstName = document.getElementById("first");
 var lastName = document.getElementById("last");
 var email = document.getElementById("email");
 var textMessage = document.getElementById("text-message");
+
+// On Submit: log the Input to console, reset
 function logMessageToConsole() {
-  console.log(firstName.value + " " + lastName.value + " with email adress " + email.value + " sent you following message: " + textMessage.value);
+  console.log(
+    firstName.value +
+      " " +
+      lastName.value +
+      " with email adress " +
+      email.value +
+      " sent you following message: " +
+      textMessage.value
+  );
   contactForm.reset();
   modal.style.display = "none";
 }
 
+//----------------------------------------
+//------- LIGHTBOX SCRIPT ----------------
+//----------------------------------------
 
+// Get the modal
+var lightbox = document.getElementById("lightboxModal");
+var lightboxImage = document.getElementById("lightbox__content__image");
+var lightboxTitle = document.getElementById("lightbox__content__title");
+
+// Get the <span> element that closes the modal
+var lightboxClose = document.getElementsByClassName(
+  "lightbox__content__close"
+)[0];
+// Get the <span> elements that point to next and previous picture
+var lightboxBack = document.getElementsByClassName(
+  "lightbox__content__back"
+)[0];
+var lightboxForward = document.getElementsByClassName(
+  "lightbox__content__forward"
+)[0];
+
+lightboxForward.onclick = function () {
+  changeLightboxItem("next");
+};
+
+lightboxBack.onclick = function () {
+  changeLightboxItem("previous");
+}
+
+// When the user clicks on <span> (x), close the modal
+lightboxClose.onclick = function () {
+  lightbox.style.display = "none";
+};
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+  if (event.target == lightbox) {
+    lightbox.style.display = "none";
+  }
+};

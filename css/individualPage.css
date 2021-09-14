@@ -203,6 +203,149 @@ textarea {
   font-weight: lighter;
 }
 
+/* The Modal (background) */
+.lightbox {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: black;
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
+  border: none;
+  /* Modal Content/Box */
+}
+
+.lightbox__content {
+  background-color: white;
+  margin: 15% auto;
+  /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 120vh;
+  /* Could be more or less, depending on screen size */
+  border-radius: .5rem;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(10px, 1fr))[10];
+      grid-template-columns: repeat(10, minmax(10px, 1fr));
+  -ms-grid-rows: (minmax(10px, 1fr))[16];
+      grid-template-rows: repeat(16, minmax(10px, 1fr));
+      grid-template-areas: ". i i i i i i i i c" ". i i i i i i i i c" ". i i i i i i i i ." ". i i i i i i i i ." ". i i i i i i i i ." ". i i i i i i i i ." ". i i i i i i i i ." "b i i i i i i i i f" "b i i i i i i i i f" ". i i i i i i i i ." ". i i i i i i i i ." ". i i i i i i i i ." ". i i i i i i i i ." ". i i i i i i i i ." ". i i i i i i i i ." ". t t t . . . . . .";
+}
+
+.lightbox__content__back {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: b;
+  place-self: center stretch;
+  font-size: 3rem;
+  color: #901c1c;
+  margin-left: 1.5rem;
+}
+
+.lightbox__content__back:hover,
+.lightbox__content__back :focus {
+  color: #da8876;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.lightbox__content__image {
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 15;
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 8;
+  grid-area: i;
+  -o-object-fit: cover;
+  object-fit: cover;
+  width: 100vh;
+  height: 80vh;
+  place-self: center center;
+  -webkit-box-shadow: 2px 2px 4px 6px #f2f1f1;
+          box-shadow: 2px 2px 4px 6px #f2f1f1;
+  border-radius: .3rem;
+}
+
+.lightbox__content__close {
+  -ms-grid-row: 3;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 3;
+  grid-area: c;
+  place-self: start end;
+  color: #901c1c;
+  float: right;
+  font-size: 4rem;
+  font-weight: 300;
+  margin-top: -1.5rem;
+}
+
+.lightbox__content__close:hover,
+.lightbox__content__close :focus {
+  color: #da8876;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.lightbox__content__forward {
+  -ms-grid-row: 8;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 10;
+  grid-area: f;
+  place-self: center end;
+  font-size: 3rem;
+  color: #901c1c;
+  margin-right: 1.5rem;
+}
+
+.lightbox__content__forward:hover,
+.lightbox__content__forward :focus {
+  color: #da8876;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.lightbox__content__title {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: t;
+  font-size: 1.5rem;
+  color: #901c1c;
+  margin-left: -1rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0rem;
+}
+
+/* The Close Button 
+  .close {
+    grid-area: forward;
+    color: white;
+    float: right;
+    font-size: 5rem;
+    font-weight: 300;
+    margin-top: -2rem;
+  
+    &:hover,
+    :focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  }
+  
+ */
 body {
   display: -ms-grid;
   display: grid;
