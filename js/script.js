@@ -6,6 +6,7 @@ var mediaArray = [];
 var photographersFilteredByTag = [];
 var mediaFilteredByPhotographer = [];
 var subpageMediaFilteredByTag = [];
+var currentArray = mediaFilteredByPhotographer;
 const body = document.querySelector("body");
 var path = window.location.pathname;
 var page = path.split("/").pop();
@@ -97,6 +98,58 @@ var Factory = function () {
           "Rendered " + this.name + " in style " + style + " to the Dom."
         );
       }
+
+      // ---------------------------------
+      // ----SUBPAGE DOM RENDERING--------
+      // ---------------------------------
+
+      else if(style === "photographer-pageheader"){
+        //catch static dom objects
+        let htmlHeadTitle = document.querySelector("title");
+        let htmlPhotographerName = document.querySelector(".photographer-pageheader__name");
+        let htmlPhotographerLocation = document.querySelector(".photographer-pageheader__location");
+        let htmlPhotographerTagline = document.querySelector(".photographer-pageheader__tagline");
+        let htmlPhotographerHashtagContainer = document.querySelector(".photographer-pageheader__hashtagcontainer");
+        let htmlPhotographerModalTitle = document.querySelector(".modal__title");
+        let htmlPhotographerImage = document.querySelector(".photographer-pageheader__image");
+        let stickyInfoLikes = document.querySelector(".sticky-info__likes");
+        let stickyInfoPrice = document.querySelector(".sticky-info__price");
+        //get pageId
+        let pageId = page.substring(0, 3);
+        let photographerIndex;
+        for (var i = 0, len = photographers.length; i < len; i++){
+          //console.log("entered for loop, looking for id: " + pageId);
+          if(photographers[i].id == pageId){
+            photographerIndex = i;
+            
+          }
+        }
+        let self = photographers[photographerIndex];
+        console.log(self);
+        htmlPhotographerName.textContent = self.name;
+        htmlPhotographerLocation.textContent = self.city + ", " + self.country;
+        htmlPhotographerTagline.textContent = self.tagline;
+        for (var tag in self.tags) {
+          let tagsaver = document.createElement("a");
+          tagsaver.classList.add("hashtag");
+          tagsaver.classList.add("hashtag--photographer-pageheader");
+          tagsaver.textContent = "#" + self.tags[tag];
+          tagsaver.href = "#" + self.tags[tag];
+          htmlPhotographerHashtagContainer.appendChild(tagsaver);
+        }
+        htmlPhotographerModalTitle.innerHTML = "Contact <br> " + self.name;
+        htmlPhotographerImage.src = "files/media/Photographers_ID_Photos/" + self.portrait;
+        htmlPhotographerImage.title = "Portrait of " + self.name;
+        htmlPhotographerImage.alt = "Portrait of " + self.name + " the photographer"
+        htmlHeadTitle.innerHTML = self.name;
+
+        //sum likes
+        let sumOfLikes = 0;
+        mediaFilteredByPhotographer.forEach((element) => {sumOfLikes += element.likes});
+        stickyInfoLikes.innerHTML = sumOfLikes + " &#9829";
+        stickyInfoPrice.textContent = self.price + "$/day";
+
+      }
     };
 
     photographer.removeFromDom = function () {
@@ -143,7 +196,7 @@ var Factory = function () {
     mediaItem.populateDom = function () {
       var extraThis = this;
 
-      console.log("Entered Populate DOM Method of item " + extraThis.id);
+      
 
       //create DOM ELEMENTS
       let parentNode = document.querySelector(".media-gallery");
@@ -160,11 +213,11 @@ var Factory = function () {
         htmlMediaItem = document.createElement("img");
       } else {
         htmlMediaItem = document.createElement("video");
+
         //htmlMediaItemSource = document.createElement("source");
         //hmtlMediaItem.src =
         //  "files/media/" + extraThis.photographerId + "/" + extraThis.video;
-        console.log("hmtl Video item created");
-        console.log(htmlMediaItem);
+        
       }
 
       //console.log(htmlMediaItem);
@@ -184,15 +237,13 @@ var Factory = function () {
       if (extraThis.image !== undefined) {
         htmlMediaItem.src =
           "files/media/" + extraThis.photographerId + "/" + extraThis.image;
-        console.log("Entered Image Content branch");
+        
         htmlMediaItem.title = extraThis.title;
       } else {
         htmlMediaItem.src =
           "files/media/" + extraThis.photographerId + "/" + extraThis.video;
         //htmlMediaItemImage.appendChild(htmlMediaItemImageSource);
-        console.log(
-          "files/media/" + extraThis.photographerId + "/" + extraThis.video
-        );
+        
         htmlMediaItem.title = extraThis.title;
       }
       htmlMediaItemTextTitle.textContent = extraThis.title;
@@ -312,49 +363,163 @@ function filterSubpageMediaByTag(tag) {
   }
   console.log(subpageMediaFilteredByTag);
 }
+
+
+//-----------------------------------
+//-------ARRAY SORTING FUNCTION------
+//-----------------------------------
+
+function sortMediaItems (array, selector){
+  if (selector.toUpperCase() == "POPULARITY"){
+    //console.log("Sorting by popularity");
+    array.sort((a, b) => a.likes - b.likes);
+    array.reverse();
+    //console.log(array);
+  }
+  else if(selector.toUpperCase() == "TITLE"){
+    //console.log("Sorting by title");
+    array.sort(function(a, b) {
+      return a.title.toLowerCase().localeCompare(b.title.toLowerCase());
+   });
+    //console.log(array);
+    
+   
+  }
+  else if(selector.toUpperCase() == "DATE"){
+    console.log("Sorting by date");
+    array.sort(function(a,b){
+      var c = new Date(a.date);
+      console.log(c);
+      var d = new Date(b.date);
+      return c-d;
+      });
+    console.log(array);
+  }
+  else{
+    console.log("Sorting selector invalid");
+  }
+}
+
+//-----------------------------------
+//-------DROPDOWN UPDATE FUNCTION----
+//-----------------------------------
+
+function updateDropdownOptions(selector){
+  let currentSelection = document.getElementById("dropdownCurrentOption");
+  let option1 = document.getElementById("dropdownOption1");
+  let option2 = document.getElementById("dropdownOption2");
+
+  switch(selector){
+    case "Title":
+      currentSelection.textContent = selector;
+      option1.textContent = "Date";
+      option2.textContent = "Popularity";
+      break;
+    case "Date":
+      currentSelection.textContent = selector;
+      option1.textContent = "Title";
+      option2.textContent = "Popularity";
+      break;
+    case "Popularity":
+      currentSelection.textContent = selector;
+      option1.textContent = "Title";
+      option2.textContent = "Date";
+      break;
+  }
+}
+
+
 //-----------------------------------
 //-------LIGHTBOX FUNCTIONS----------
 //-----------------------------------
-function changeLightboxItem(direction){
-  console.log(lightboxImage.src);
-  let currentImageSource = lightboxImage.src;
-  let currentMediaArray = Array.from(document.getElementById('media-gallery').children);
-  console.log(currentMediaArray[0].firstChild.firstChild.src);
-  let currentIndex = currentMediaArray.map(function (e) {
-    return e.firstChild.firstChild.src;
-  })
-  .indexOf(currentImageSource);
 
-  if(direction === "next"){
+function fillLightboxWithDomElement(type) {
+  let currentLBContent = document.getElementById("lightbox__content__image");
+  let parent = currentLBContent.parentNode;
+  parent.removeChild(currentLBContent);
+  let newLBContent;
+  if (type === "image") {
+    newLBContent = document.createElement("img");
+  } else if (type === "video") {
+    newLBContent = document.createElement("video");
+  } else {
+    console.log("Unknown lightbox content type");
+  }
+  newLBContent.classList.add("lightbox__content__image");
+  newLBContent.id = "lightbox__content__image";
+  parent.insertBefore(newLBContent, lightboxClose);
+}
+
+function changeLightboxItem(direction) {
+  //console.log(lightboxImage.src);
+
+  //create ARRAY from DOM and find index of node containing current image
+  let currentLBContent = document.getElementById("lightbox__content__image");
+  let currentImageSource = currentLBContent.src;
+  let currentMediaArray = Array.from(
+    document.getElementById("media-gallery").children
+  );
+  //console.log(currentMediaArray[0].firstChild.firstChild.src);
+  //console.log(currentMediaArray[0]);
+  let currentIndex = currentMediaArray
+    .map(function (e) {
+      return e.firstChild.firstChild.src;
+    })
+    .indexOf(currentImageSource);
+
+  if (direction === "next") {
     let nextIndex = currentIndex + 1;
-    if(nextIndex >= currentMediaArray.length){
+    if (nextIndex >= currentMediaArray.length) {
       nextIndex = 0;
     }
-    lightboxImage.src = currentMediaArray[nextIndex].firstChild.firstChild.src;
-    
+    let nextItemPath = currentMediaArray[nextIndex].firstChild.firstChild.src;
+    if (nextItemPath.slice(nextItemPath.length - 3) === "mp4") {
+      
+      fillLightboxWithDomElement("video");
+      document.getElementById("lightbox__content__image").src = nextItemPath;
+    } else {
+      fillLightboxWithDomElement("image");
+      document.getElementById("lightbox__content__image").src = nextItemPath;
+    }
+    lightboxTitle.textContent =
+      currentMediaArray[nextIndex].firstChild.firstChild.title;
   }
 
-  if(direction === "previous"){
+  if (direction === "previous") {
     let nextIndex = currentIndex - 1;
-    if(nextIndex < 0){
+    if (nextIndex < 0) {
       nextIndex = currentMediaArray.length - 1;
     }
-    lightboxImage.src = currentMediaArray[nextIndex].firstChild.firstChild.src;
-    
+    let nextItemPath = currentMediaArray[nextIndex].firstChild.firstChild.src;
+    if (nextItemPath.slice(nextItemPath.length - 3) === "mp4") {
+      console.log("this is a video");
+      fillLightboxWithDomElement("video");
+      document.getElementById("lightbox__content__image").src = nextItemPath;
+    } else {
+      fillLightboxWithDomElement("image");
+      document.getElementById("lightbox__content__image").src = nextItemPath;
+    }
+    lightboxTitle.textContent =
+      currentMediaArray[nextIndex].firstChild.firstChild.title;
   }
-  
 
   console.log(currentIndex);
 }
 
-//readJsonMedia();
 
+
+
+//-----------------------------------
+//-----------------------------------
+//-----------------------------------
 //-----------------------------------
 
 // ACTUAL CALLING SEQUENCE TO parse data and then fill the INDEX PAGE OR SUBPAGES BELOW
 
 //-----------------------------------
-
+//-----------------------------------
+//-----------------------------------
+//-----------------------------------
 
 readJsonPhotographers().then(() => {
   if (
@@ -373,6 +538,7 @@ readJsonPhotographers().then(() => {
     readJsonMedia().then(() => {
       filterMediaByPhotographer(pageId);
       console.log(mediaFilteredByPhotographer);
+      photographers[0].populateDom("photographer-pageheader");
       mediaFilteredByPhotographer.forEach((element) => element.populateDom());
     });
   } else {
@@ -383,7 +549,7 @@ readJsonPhotographers().then(() => {
 });
 
 //-----------------------------
-// GLOBAL EVENT LISTENER 
+// GLOBAL EVENT LISTENER
 
 // add global event listener, check for click events of hashtag class for filtering
 body.addEventListener("click", (event) => {
@@ -401,8 +567,14 @@ body.addEventListener("click", (event) => {
     //----------------------------------------
     //LIGHTBOX EVENT ROUTINE
     if (event.target.classList.contains("media-item__image")) {
+      fillLightboxWithDomElement("image");
       let lightboxTarget = event.target.src;
       let imageTitle = event.target.title;
+      console.log(event.target.src);
+      console.log(lightboxTarget);
+      let currentLBI = document.getElementById("lightbox__content__image");
+      currentLBI.src = lightboxTarget;
+
       /*let currentIndex = Array.from(document.getElementById('media-gallery').children)
         .map(function (e) {
           return e.title;
@@ -414,20 +586,57 @@ body.addEventListener("click", (event) => {
       lightboxImage.src = lightboxTarget;
       lightboxTitle.textContent = event.target.title;
     }
+    // in case of a video
+    else if (
+      event.target.src !== undefined &&
+      event.target.src.slice(event.target.src.length - 3) == "mp4"
+    ) {
+      fillLightboxWithDomElement("video");
+      let lightboxTarget = event.target.src;
+      let imageTitle = event.target.title;
+      console.log(event.target.src);
+      console.log(lightboxTarget);
+      let currentLBI = document.getElementById("lightbox__content__image");
+      currentLBI.src = lightboxTarget;
+      lightbox.style.display = "block";
+      lightboxImage.src = lightboxTarget;
+      lightboxTitle.textContent = event.target.title;
+    }
+    else if (event.target.classList.contains("dropdown__option")){
+      //remove # symbol from string
+      let actualTag = event.target.textContent;
+      console.log("Entered TagTree, Tag is : " + actualTag);
+      //------LISTEN FOR SORTING TAGS
+      if( actualTag.toUpperCase() === "POPULARITY"||
+          actualTag.toUpperCase() === "DATE"||
+          actualTag.toUpperCase() === "TITLE"){
+            console.log("entered sorting tree");
+            sortMediaItems(currentArray, actualTag);
+            currentArray.forEach((element) => element.removeFromDom());
+            currentArray.forEach((element) => element.populateDom());
+            updateDropdownOptions(actualTag);
+          }
+    }
+
     //--------------   FILTER SUBPAGE MEDIA ITEMS by hashtag
     else if (event.target.classList.contains("hashtag")) {
       //remove # symbol from string
       let actualTag = event.target.textContent.substring(1);
-      //filter by tag
+      console.log("Entered TagTree, Tag is : " + actualTag);
+      
+
+      //filter media by tag
       filterSubpageMediaByTag(actualTag);
-      console.log(mediaFilteredByPhotographer);
+      
       mediaFilteredByPhotographer.forEach((element) => element.removeFromDom());
-      console.log(mediaFilteredByPhotographer);
+     
       if (actualTag === "all") {
+        currentArray = mediaFilteredByPhotographer;
         mediaFilteredByPhotographer.forEach((element) =>
           element.populateDom("homepagePortrait")
         );
       } else {
+        currentArray = subpageMediaFilteredByTag;
         subpageMediaFilteredByTag.forEach((element) =>
           element.populateDom("homepagePortrait")
         );
@@ -555,7 +764,7 @@ lightboxForward.onclick = function () {
 
 lightboxBack.onclick = function () {
   changeLightboxItem("previous");
-}
+};
 
 // When the user clicks on <span> (x), close the modal
 lightboxClose.onclick = function () {

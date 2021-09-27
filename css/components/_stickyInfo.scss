@@ -1,0 +1,25 @@
+.sticky-info{
+        display: inline-flex;
+        font-size: 1.5rem;
+        font-weight: 550;
+
+        position: fixed;
+        bottom: 0px;
+        right: 3rem;
+
+        min-width: 15rem;
+        
+        user-select: none;
+
+        background-color: $secondaryFill;
+        padding: 1.2rem;
+        border-top-left-radius: .5rem;
+        border-top-right-radius: .5rem;
+        &__price{
+            position: relative;
+            right: -3rem;
+        }
+    
+    
+}
+
