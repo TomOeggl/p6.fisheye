@@ -25,6 +25,12 @@ h1 {
   margin-right: .3rem;
 }
 
+@media (max-width: 450px) {
+  .hashtag {
+    font-size: .8rem;
+  }
+}
+
 .hashtag:hover, .hashtag:focus {
   color: #ffffff;
   background-color: #901c1c;

@@ -25,6 +25,12 @@ h1 {
   margin-right: .3rem;
 }
 
+@media (max-width: 450px) {
+  .hashtag {
+    font-size: .8rem;
+  }
+}
+
 .hashtag:hover, .hashtag:focus {
   color: #ffffff;
   background-color: #901c1c;
@@ -86,6 +92,14 @@ header {
       grid-template-rows: 100px;
 }
 
+@media (max-width: 450px) {
+  header {
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+    max-height: 7rem;
+  }
+}
+
 .header-link__image {
   margin-top: 2rem;
   margin-left: 8vw;
@@ -94,10 +108,39 @@ header {
   grid-column-end: 2;
 }
 
+@media (max-width: 450px) {
+  .header-link__image {
+    max-width: 50%;
+    margin: 0rem;
+  }
+}
+
+@media (max-width: 450px) {
+  h1 {
+    position: absolute;
+    top: .5rem;
+    right: -2rem;
+    font-size: 1rem;
+    width: 12rem;
+  }
+}
+
 nav {
   -ms-flex-item-align: end;
       -ms-grid-row-align: end;
       align-self: end;
+}
+
+@media (max-width: 450px) {
+  nav {
+    max-width: 90%;
+    -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
+        align-self: center;
+    overflow: clip;
+    line-height: 2rem;
+    text-align: center;
+  }
 }
 
 main {
@@ -113,6 +156,15 @@ main {
   place-content: stretch / stretch;
 }
 
+@media (max-width: 450px) {
+  main {
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+    position: absolute;
+    top: 12rem;
+  }
+}
+
 .photographer-portrait {
   -ms-grid-column-align: center;
       justify-self: center;
@@ -120,6 +172,12 @@ main {
       -ms-grid-row-align: center;
       align-self: center;
   text-align: center;
+}
+
+@media (max-width: 450px) {
+  .photographer-portrait {
+    margin-bottom: 2rem;
+  }
 }
 
 .photographer-portrait__image {
@@ -131,6 +189,13 @@ main {
   float: top;
   -webkit-box-shadow: 2px 2px 4px 6px #f2f2f2;
           box-shadow: 2px 2px 4px 6px #f2f2f2;
+}
+
+@media (max-width: 450px) {
+  .photographer-portrait__image {
+    width: 60vw;
+    height: 60vw;
+  }
 }
 
 .photographer-portrait__name {

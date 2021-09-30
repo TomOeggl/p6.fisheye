@@ -11,6 +11,8 @@ body{
     grid-template-areas:    "h h h "
                             "m m m"
                             "m m m";
+
+    
 }
 
 header{
@@ -19,6 +21,10 @@ header{
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 100px;
     //border: 2px solid black;
+    @media (max-width: $mobileBreakpoint)  {
+        grid-template-columns: 1fr; 
+        max-height: 7rem;       
+    }
 }
 
 .header-link__image{
@@ -26,12 +32,36 @@ header{
     margin-left: 8vw;
     grid-column-start: 1;
     grid-column-end: 2;
+
+    @media (max-width: $mobileBreakpoint)  {
+        max-width: 50%;  
+        margin: 0rem;     
+    }
     
+}
+
+h1{
+    @media (max-width: $mobileBreakpoint)  {
+        position: absolute;
+        top: .5rem;
+        right: -2rem;
+        font-size: 1rem;
+        width: 12rem;       
+    }
 }
 
 nav{
     //border: 2px solid red;
     align-self: end;
+    @media (max-width: $mobileBreakpoint)  {
+        max-width: 90%;
+        align-self: center;
+        overflow: clip;
+        line-height: 2rem;
+        text-align: center;
+        
+              
+    }
     
 }
 
@@ -44,6 +74,11 @@ main{
     grid-area: m;
     grid-template-columns: 1fr 1fr 1fr;
     place-content: stretch / stretch;
+    @media (max-width: $mobileBreakpoint)  {
+        grid-template-columns: 1fr; 
+        position: absolute;
+        top: 12rem;       
+    }
 
 }
 
@@ -54,6 +89,9 @@ main{
     justify-self: center;
     align-self: center;
     text-align: center;
+    @media (max-width: $mobileBreakpoint)  {
+        margin-bottom: 2rem;        
+    }
     &__image{
         -o-object-fit: cover;
         object-fit: cover;
@@ -62,6 +100,11 @@ main{
         border-radius: 50%;
         float: top;
         box-shadow: 2px 2px 4px 6px rgb(242, 242, 242);
+
+        @media (max-width: $mobileBreakpoint)  {
+            width: 60vw;
+            height: 60vw;        
+        }
     }
     &__name{
         color: $primaryLightText;
