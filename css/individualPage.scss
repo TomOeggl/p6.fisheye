@@ -18,6 +18,13 @@ body {
     "h h h "
     "m m m"
     "m m m";
+    @media (max-width: $mobileBreakpoint)  {
+      grid-template-columns: 1fr;
+      grid-template-areas:  "h"
+                            "m"
+                            "m";       
+  }
+    
 }
 
 header {
@@ -26,10 +33,15 @@ header {
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 180px;
   //border: 2px solid black;
+  @media (max-width: $mobileBreakpoint){
+    grid-template-rows: max-content;
+    margin-bottom: 2rem;
+  }
 }
 
 .header-link {
   //padding: 2rem;
+  
 }
 
 .header-link__image {
@@ -37,6 +49,10 @@ header {
   margin-left: -1rem;
   grid-column-start: 1;
   grid-column-end: 2;
+  @media (max-width: $mobileBreakpoint){
+    width: 50vw;
+    margin-left: 0rem;
+  }
 }
 
 //-------------------------
@@ -54,6 +70,12 @@ main {
     "c c c";
   //place-content: stretch / stretch;
   max-height: max-content;
+  @media (max-width: $mobileBreakpoint)  {
+    grid-template-columns: 1fr;
+    grid-template-areas:  "p"
+                          "o"
+                          "c";       
+}
 }
 
 //-------------------------
@@ -70,11 +92,20 @@ main {
   
   grid-template-columns: subgrid;
   grid-template-areas: "t b p";
+  @media (max-width: $mobileBreakpoint)  {
+    //grid-template-columns: 1fr;
+    grid-template-areas:  "t p";
+    background-color: white;
+                                 
+}
 
   &__textcontainer {
     grid-area: t;
     margin: 2rem;
     align-self: center;
+    @media (max-width: $mobileBreakpoint){
+      margin: 0rem;
+    }
   }
 
   &__name {
@@ -83,26 +114,50 @@ main {
     font-weight: 400;
     padding: 0.3rem;
     margin: 0.3rem;
+    @media (max-width: $mobileBreakpoint)  {
+     font-size: 2.5rem;     
+  }
   }
   &__location {
     color: $primaryFill;
     font-size: 2.4rem;
     margin: 0.6rem;
     margin-top: 1rem;
+    @media (max-width: $mobileBreakpoint)  {
+      font-size: 1.1rem; 
+      margin-top: -.7rem;  
+      margin-bottom: 0rem;
+    }
   }
   &__tagline {
     font-size: 2rem;
     margin: 0.6rem;
     font-weight: 350;
     margin-bottom: 2rem;
+    @media (max-width: $mobileBreakpoint)  {
+      font-size: .9rem;
+      margin-bottom: .6rem;
+      margin-top: .2rem;   
+    }
   }
   &__hashtagcontainer {
     margin-top: 4rem;
     margin-left: 0.6rem;
+    @media (max-width: $mobileBreakpoint)  {
+        margin-top: 0rem;    
+    }
   }
 
   &__buttoncontainer{
     grid-area: b;
+    @media (max-width: $mobileBreakpoint){
+      display: block;
+      position: fixed;
+      //float:bottom;
+      bottom: 2rem;
+      left: 27vw;
+      //z-index: 1;
+    }
   }
 
   &__image {
@@ -118,17 +173,32 @@ main {
     margin-right: 4rem;
 
     box-shadow: 2px 2px 4px 6px rgb(242, 242, 242);
+
+    @media (max-width: $mobileBreakpoint)  {
+       width: 7rem; 
+       height: 7rem;
+       margin-top: -1rem;
+       margin-right: 1rem;  
+    }
   }
 }
 
 #contact-btn{
   margin-top: 5rem;
+  @media (max-width: $mobileBreakpoint){
+    margin-top: 0rem;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+  }
 }
 
 .order-by {
   grid-area: o;
   padding-top: 2rem;
   padding-bottom: 5rem;
+  @media (max-width: $mobileBreakpoint){
+    display: none;
+  }
   &__label {
     font-size: 1.5rem;
     font-weight: 600;
@@ -142,6 +212,9 @@ main {
   grid-template-rows: auto;
   justify-content: center;
   gap: 1vw 6vw;
+  @media (max-width: $mobileBreakpoint){
+    margin-top: 2rem;
+  }
 }
 
 .media-item {
@@ -160,9 +233,16 @@ main {
     height: 22.5vw;
     border-radius: 0.6rem;
     box-shadow: 2px 2px 4px 6px rgb(249, 248, 248);
+    @media (max-width: $mobileBreakpoint){
+      width:95vw;
+      height: 60vw;
+    }
   }
   &__textcontent {
     display: inline;
+    @media (max-width: $mobileBreakpoint){
+      margin-top: 0rem;
+    }
   }
   &__title {
     color: $primaryFill;
@@ -171,6 +251,11 @@ main {
     display: inline;
     float: left;
     margin-top: 0.5rem;
+    @media (max-width: $mobileBreakpoint){
+      font-size: 1.1rem;
+      margin-left: .2rem;
+      margin-top: .2rem;
+    }
   }
   &__likes {
     color: $primaryFill;
@@ -179,6 +264,11 @@ main {
     display: inline;
     float: right;
     margin-top: 0.5rem;
+    @media (max-width: $mobileBreakpoint){
+      font-size: 1.1rem;
+      margin-right: .3rem;
+      margin-top: .2rem;
+    }
   }
 }
 
@@ -189,4 +279,8 @@ video {
     height: 22.5vw;
     border-radius: 0.6rem;
     box-shadow: 2px 2px 4px 6px rgb(249, 248, 248);
+    @media (max-width: $mobileBreakpoint){
+      width:95vw;
+      height: 60vw;
+    }
 }

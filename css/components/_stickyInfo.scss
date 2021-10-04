@@ -15,6 +15,9 @@
         padding: 1.2rem;
         border-top-left-radius: .5rem;
         border-top-right-radius: .5rem;
+        @media (max-width: $mobileBreakpoint){
+            display: none;
+          }
         &__price{
             position: relative;
             right: -3rem;

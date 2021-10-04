@@ -25,6 +25,12 @@
     padding: .8rem;
     padding-top: .1rem;
     padding-bottom: .1rem;
+    @media (max-width: $mobileBreakpoint)  {
+       font-size: .9rem;   
+       text-align: start;
+       padding-right: .2rem;
+       padding-left: .2rem;
+    }
     
 }
 

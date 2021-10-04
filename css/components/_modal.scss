@@ -7,7 +7,7 @@
   top: 0;
   width: 100%; /* Full width */
   height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
+  //overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0, 0, 0); /* Fallback color */
   background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 
@@ -19,6 +19,12 @@
     border: 1px solid #888;
     width: 30%; /* Could be more or less, depending on screen size */
     border-radius: .5rem;
+    @media (max-width: $mobileBreakpoint){
+      width:92vw;
+      height: 100vh;
+      margin-top: 0px;
+      //margin: 0px auto;
+    }
 
     
   }
@@ -28,6 +34,9 @@
       position: top;
       padding-top: 0rem;
       margin-top: 0rem;
+      @media (max-width: $mobileBreakpoint){
+        font-size: 2.5rem;
+      }
   }
 }
 /* The Close Button */
@@ -37,6 +46,7 @@
   font-size: 5rem;
   font-weight: 300;
   margin-top: -2rem;
+  
 
   &:hover,
   :focus {
@@ -55,6 +65,9 @@
     font-weight: 400;
     line-height: 3.3rem;
     margin-bottom: 0rem;
+    @media (max-width: $mobileBreakpoint){
+      font-size: 1.5rem;
+    }
 }
 
 .text-control{
@@ -78,6 +91,13 @@
     height: 8rem;
     
     //margin-top: -1rem;
+}
+#submit{
+  margin: 2rem 24vw;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  padding-right: 3rem;
+  padding-left: 3rem;
 }
 
 textarea{
