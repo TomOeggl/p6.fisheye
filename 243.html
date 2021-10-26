@@ -47,15 +47,14 @@
       <section class="photographer-pageheader">
         <div class="photographer-pageheader__textcontainer">
           <h1 class="photographer-pageheader__name">Name</h1>
-          <p class="photographer-pageheader__location">City, Country</p>
-          <p class="photographer-pageheader__tagline">
+          <h2 aria-label="Location of the photographer" class="photographer-pageheader__location">City, Country</h2>
+          <h3 aria-label="Tagline of the photographer" class="photographer-pageheader__tagline">
             The Tagline
-          </p>
-          <span class="photographer-pageheader__hashtagcontainer">
+          </h3>
+          <span aria-label="Hashtag Navigation"  tabindex="0" class="photographer-pageheader__hashtagcontainer">
            
-            <a href="#all" class="hashtag hashtag--photographer-pageheader"
-              >#all</a
-            >
+            
+            <button id="hashtag-all" class="hashtag hashtag--photographer-pageheader">#all</button>
           </span>
         </div>
         <div class="photographer-pageheader__buttoncontainer">
@@ -70,8 +69,9 @@
             <form name="contact" id="contact-form"  method="get" onsubmit="logMessageToConsole(); return false">
               <div
                 class="formData">
-                <label>First Name</label><br>
+                <label id="first-label">First Name</label><br>
                 <input
+                  aria-labelledby="first-label"
                   class="text-control"
                   type="text"
                   id="first"
@@ -83,8 +83,9 @@
               </div>
               <div
                 class="formData">
-                <label>Last Name</label><br>
+                <label id="last-label">Last Name</label><br>
                 <input
+                  aria-labelledby="last-label"
                   class="text-control"
                   type="text"
                   id="last"
@@ -96,8 +97,9 @@
               </div>
               <div
                 class="formData">
-                <label>Email</label><br>
+                <label id="email-label">Email</label><br>
                 <input
+                  aria-labelledby="email-label"
                   class="text-control"
                   type="email"
                   id="email"
@@ -107,8 +109,8 @@
               </div>
               <div
                 class="formData">
-                <label>Your message</label><br>
-                <textarea id="text-message" rows="4" cols="60">
+                <label id="text-message-label">Your message</label><br>
+                <textarea aria-labelledby="text-message-label" id="text-message" rows="4" cols="60">
                 
                   </textarea>
                   <br>
@@ -131,23 +133,32 @@
           title="Portrait of Name"
         />
       </section>
-      <div class="order-by">
+      <!--
+      <div aria-label="Order by" class="order-by" role="listbox">
         <label class="order-by__label">Order by:</label>
         <div class="dropdown">
-          <button class="dropbtn" id="dropdownCurrentOption">Popularity </button>
-          <span class="dropdown__pointer">&#10094;</span>
+          <button class="dropbtn" aria-labelledby="dropdownCurrentOption" role="option" id="dropdownCurrentOption" tabindex="0">Popularity </button>
+          <span class="dropdown__pointer" aria-hidden="true"><i class="fas fa-chevron-left"></i></span>
           <div class="dropdown-content">
             
-            <a class="dropdown__option" href="#order-by" id="dropdownOption1">Date</a>
+            <a class="dropdown__option" href="#order-by" role="option" aria-labelledby="dropdownOption1" id="dropdownOption1" tabindex="0">Date</a>
             <span class="dropdown__lines1">_____________________________</span>
             <span class="dropdown__lines2">_____________________________</span>
-            <a class="dropdown__option" href="#order-by" id="dropdownOption2">Title</a>
+            <a class="dropdown__option" href="#order-by" role="option" aria-labelledby="dropdownOption2" id="dropdownOption2" tabindex="0">Title</a>
             
           </div>
         </div>
+      </div>-->
+      <div class="order-by">
+        <label class="order-by__label" for="order-select">Order by:<span class="dropdown__pointer" aria-hidden="true"><i class="fas fa-chevron-left"></i></span></label>
+        <select onChange="orderBy(this.value)" class="dropdown-content" name="order-by" id="order-select">
+          <option  value="popularity">Popularity</option>
+          <option  value="date">Date</option>
+          <option  value="title">Title</option>
+        </select>
       </div>
 
-      <div id="lightboxModal" class="lightbox">
+      <div aria-modal="true" role="dialog" id="lightboxModal" class="lightbox">
         <!-- Lightbox content -->
         <div class="lightbox__content">
           <span class="lightbox__content__back">&#10094;</span>
@@ -163,7 +174,7 @@
           <p class="lightbox__content__title" id="lightbox__content__title">Mimi Keel</p>
         </div>
       </div>
-      <section class="media-gallery" id="media-gallery">
+      <div aria-label="Media Gallery" class="media-gallery" id="media-gallery" role="grid" tabindex="0" aria-rowcount="4">
         <!-- DUMMY MEDIA ITEM 
         <div class="media-item">
           <a href="#img" class="media-item__imagelink">
@@ -192,7 +203,7 @@
             <p class="media-item__likes">9 <i class="fas fa-heart"></i></p>
           </div>
         </div>
-      --></section>
+      --></div>
       
 
       <!--   DUMMY HTML STRUCTURE for mirroring in javascript
@@ -220,7 +231,7 @@
   <!-- The Modal -->
   
     </main>
-    <span class="sticky-info"> <span class="sticky-info__likes "><i class="fas fa-heart"></i></span><span class="sticky-info__price"></span></span>
+    <aside class="sticky-info"> <span class="sticky-info__likes "><i class="fas fa-heart"></i></span><span class="sticky-info__price"></span></aside>
     <script src="js/script.js"></script>
   </body>
 </html>

@@ -32,16 +32,32 @@
   }
   
   /* Dropdown Content (Hidden by Default) */
+  
   .dropdown-content {
-    display: none;
+    //display: none;
+    appearance: none;
     position: absolute;
     background-color: $primaryFill;
     color: white;
     min-width: 14rem;
     //box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
+    //z-index: 1;
     border-bottom-left-radius: .3rem;
     border-bottom-right-radius: .3rem;
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    //display: block;
+    font-size: 1.5rem;
+    margin-top: -.5rem;
+    margin-left: .5rem;
+    color: white;
+   
+    
+    border-radius: .3rem;
+    min-width: 14rem;
+    text-align: left;
+    border: 0px white none;
   }
   
   /* Links inside the dropdown */
@@ -54,8 +70,8 @@
   }
   
   /* Change color of dropdown links on hover */
-  .dropdown-content a:hover {
-    background-color: $primaryFill;
+  .dropdown-content:focus {
+    border-radius: .3rem;
   }
 
   .dropdown:hover a{

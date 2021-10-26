@@ -130,11 +130,11 @@ var Factory = function () {
         htmlPhotographerLocation.textContent = self.city + ", " + self.country;
         htmlPhotographerTagline.textContent = self.tagline;
         for (var tag in self.tags) {
-          let tagsaver = document.createElement("a");
+          let tagsaver = document.createElement("button");
           tagsaver.classList.add("hashtag");
           tagsaver.classList.add("hashtag--photographer-pageheader");
           tagsaver.textContent = "#" + self.tags[tag];
-          tagsaver.href = "#" + self.tags[tag];
+          //tagsaver.href = "#" + self.tags[tag];
           htmlPhotographerHashtagContainer.appendChild(tagsaver);
         }
         htmlPhotographerModalTitle.innerHTML = "Contact <br> " + self.name;
@@ -200,7 +200,7 @@ var Factory = function () {
 
       //create DOM ELEMENTS
       let parentNode = document.querySelector(".media-gallery");
-      let htmlMediaItemContainer = document.createElement("div");
+      let htmlMediaItemContainer = document.createElement("article");
       let htmlMediaItemImageLink = document.createElement("a");
       let htmlMediaItem;
       let htmlMediaItemSource;
@@ -223,7 +223,10 @@ var Factory = function () {
       //console.log(htmlMediaItem);
       //assign Classes to DOM ELEMENTS
       htmlMediaItemContainer.classList.add("media-item");
+      //htmlMediaItemContainer.setAttribute("role", "gridcell");
+      htmlMediaItemContainer.setAttribute("tabindex", "0");
       htmlMediaItemImageLink.classList.add("media-item__imagelink");
+      //htmlMediaItemImageLink.setAttribute("tabindex", "0");
       if (extraThis.image !== undefined) {
         htmlMediaItem.classList.add("media-item__image");
       }
@@ -777,3 +780,88 @@ window.onclick = function (event) {
     lightbox.style.display = "none";
   }
 };
+
+
+
+document.onkeydown = function(e) {
+  if(e.key === "Escape") { 
+    //document.activeElement.click();
+    lightbox.style.display = "none";
+    modal.style.display ="none";
+  }
+  else if(e.key === "Enter") { 
+    document.activeElement.click();
+    console.log(document.activeElement);
+    if(document.activeElement.classList.contains("media-item")){
+      var target = document.activeElement.firstChild.firstChild;
+      console.log(target);
+      if (target.classList.contains("media-item__image")) {
+        fillLightboxWithDomElement("image");
+        let lightboxTarget = target.src;
+        let imageTitle = target.title;
+        console.log(target.src);
+        console.log(lightboxTarget);
+        let currentLBI = document.getElementById("lightbox__content__image");
+        currentLBI.src = lightboxTarget;
+  
+        /*let currentIndex = Array.from(document.getElementById('media-gallery').children)
+          .map(function (e) {
+            return e.title;
+          })
+          .indexOf(imageTitle);
+        changeLightbox(nextItem(currentIndex));*/
+  
+        lightbox.style.display = "block";
+        lightboxImage.src = lightboxTarget;
+        lightboxTitle.textContent = target.title;
+      }
+      // in case of a video
+      else if (
+        target.src !== undefined &&
+        target.src.slice(target.src.length - 3) == "mp4"
+      ) {
+        fillLightboxWithDomElement("video");
+        let lightboxTarget = target.src;
+        let imageTitle = target.title;
+        console.log(target.src);
+        console.log(lightboxTarget);
+        let currentLBI = document.getElementById("lightbox__content__image");
+        currentLBI.src = lightboxTarget;
+        lightbox.style.display = "block";
+        lightboxImage.src = lightboxTarget;
+        lightboxTitle.textContent = target.title;
+      };
+    }
+  }
+  else if(e.key === "ArrowLeft"){
+    
+    changeLightboxItem("previous");
+  }
+  else if(e.key === "ArrowRight"){
+    changeLightboxItem("next");
+  }
+};
+
+
+  
+
+
+const buttonAll = document.getElementById("hashtag-all");
+
+buttonAll.onclick = function() {
+  mediaFilteredByPhotographer.forEach((element) => element.removeFromDom());
+  currentArray = mediaFilteredByPhotographer;
+        mediaFilteredByPhotographer.forEach((element) =>
+          element.populateDom("homepagePortrait")
+        );
+};
+
+
+//--------- HTML SELECT FUNCTION
+
+function orderBy(selected){
+  sortMediaItems(currentArray, selected);
+  currentArray.forEach((element) => element.removeFromDom());
+  currentArray.forEach((element) => element.populateDom());
+
+}
