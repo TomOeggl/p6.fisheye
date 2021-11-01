@@ -32,14 +32,9 @@
   </head>
 
   <body>
-    <header>
-      <a href="index.html" class="header-link">
-        <img
-          src="files/media/fisheyeLogo.png"
-          alt="Fisheye Company Logo"
-          title="fisheyeLogo"
-          class="header-link__image"
-        />
+    <header class="header-link__container" tabindex="0">
+      <a href="index.html" class="header-link" tabindex="0">
+        <img src="files/media/fisheyeLogo.png" alt="Fisheye Company Logo - jumps to index page" title="fisheyeLogo" class="header-link__image">
       </a>
     </header>
 
@@ -51,7 +46,7 @@
           <h3 aria-label="Tagline of the photographer" class="photographer-pageheader__tagline">
             The Tagline
           </h3>
-          <span aria-label="Hashtag Navigation"  tabindex="0" class="photographer-pageheader__hashtagcontainer">
+          <span aria-roledescription="Hashtag Navigation"  tabindex="0" class="photographer-pageheader__hashtagcontainer">
            
             
             <button id="hashtag-all" class="hashtag hashtag--photographer-pageheader">#all</button>
@@ -60,7 +55,11 @@
         <div class="photographer-pageheader__buttoncontainer">
           <button id="contact-btn" class="button-primary">Contact me</button>
         </div>
-        <div id="contactModal" class="modal">
+    
+  <!-- The Modal -->
+  
+
+        <div aria-modal="true" role="dialog" id="contactModal" class="modal">
           <!-- Modal content -->
           <div class="modal__content">
             <span class="close">&times;</span>
@@ -128,27 +127,12 @@
         
         <img
           class="photographer-pageheader__image"
-          src="files/media/Photographers_ID_Photos/MimiKeel.jpg"
+          src="none"
           alt="Portrait of Name the photographer"
           title="Portrait of Name"
         />
       </section>
-      <!--
-      <div aria-label="Order by" class="order-by" role="listbox">
-        <label class="order-by__label">Order by:</label>
-        <div class="dropdown">
-          <button class="dropbtn" aria-labelledby="dropdownCurrentOption" role="option" id="dropdownCurrentOption" tabindex="0">Popularity </button>
-          <span class="dropdown__pointer" aria-hidden="true"><i class="fas fa-chevron-left"></i></span>
-          <div class="dropdown-content">
-            
-            <a class="dropdown__option" href="#order-by" role="option" aria-labelledby="dropdownOption1" id="dropdownOption1" tabindex="0">Date</a>
-            <span class="dropdown__lines1">_____________________________</span>
-            <span class="dropdown__lines2">_____________________________</span>
-            <a class="dropdown__option" href="#order-by" role="option" aria-labelledby="dropdownOption2" id="dropdownOption2" tabindex="0">Title</a>
-            
-          </div>
-        </div>
-      </div>-->
+      
       <div class="order-by">
         <label class="order-by__label" for="order-select">Order by:<span class="dropdown__pointer" aria-hidden="true"><i class="fas fa-chevron-left"></i></span></label>
         <select onChange="orderBy(this.value)" class="dropdown-content" name="order-by" id="order-select">
@@ -166,70 +150,17 @@
             class="lightbox__content__image"
             id="lightbox__content__image"
             src="#"
-            alt="Portrait of Name the photographer"
-            title="Portrait of Name"
+            alt="A photo with the tags xy called Title"
+            title="Title of the Lightbox Image"
           />
           <span class="lightbox__content__close">&times;</span>
           <span class="lightbox__content__forward">&#10095;</span>
-          <p class="lightbox__content__title" id="lightbox__content__title">Mimi Keel</p>
+          <h2 class="lightbox__content__title" id="lightbox__content__title">Lightbox Image Title</h2>
         </div>
       </div>
       <div aria-label="Media Gallery" class="media-gallery" id="media-gallery" role="grid" tabindex="0" aria-rowcount="4">
-        <!-- DUMMY MEDIA ITEM 
-        <div class="media-item">
-          <a href="#img" class="media-item__imagelink">
-            <img
-              class="media-item__image"
-              src="files/media/Photographers_ID_Photos/MimiKeel.jpg"
-              alt="Portrait of Mimi Keel the photographer"
-              title="Portrait of Mimi Keel"
-            />
-          </a>
-          <div class="media-item__text-content">
-            <p class="media-item__title">Image Title</p>
-            <p class="media-item__likes">9 <i class="fas fa-heart"></i></p>
-          </div>
-        </div> 
-      <div class="media-item">
-          <a href="#img" class="media-item__imagelink">
-            <video>
-              
-              <source  src="files/media/243/Animals_Wild_Horses_in_the_mountains.mp4">
-            </video>
-            
-          </a>
-          <div class="media-item__text-content">
-            <p class="media-item__title">Image Title</p>
-            <p class="media-item__likes">9 <i class="fas fa-heart"></i></p>
-          </div>
         </div>
-      --></div>
-      
-
-      <!--   DUMMY HTML STRUCTURE for mirroring in javascript
-    <section class="photographer-portrait">
-      <a href="mimikeel.html" class="photographer-portrait__containerlink">
-        <img
-          class="photographer-portrait__image"
-          src="files/media/Photographers_ID_Photos/MimiKeel.jpg"
-          alt="Portrait of Mimi Keel the photographer"
-          title="Portrait of Mimi Keel"
-        />
-        <h3 class="photographer-portrait__name">Mimi Keel</h3>
-      </a>
-        <p class="photographer-portrait__location">London, UK</p>
-        <p class="photographer-portrait__tagline">Finding beauty in everyday things</p>
-        <p class="photographer-portrait__price">400$/day</p>
-        <span class="photographer-portrait__hashtagcontainer">
-        <a href="#portrait" class="hashtag">#portrait</a>
-        <a href="#events" class="hashtag">#events</a>
-        <a href="#travel" class="hashtag">#travel</a>
-        <a href="#animals" class="hashtag">#animals</a>
-        </span>
-    </section>
-  -->
-  <!-- The Modal -->
-  
+ 
     </main>
     <aside class="sticky-info"> <span class="sticky-info__likes "><i class="fas fa-heart"></i></span><span class="sticky-info__price"></span></aside>
     <script src="js/script.js"></script>

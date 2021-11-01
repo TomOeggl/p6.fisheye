@@ -14,6 +14,10 @@ h1 {
   font-weight: 400;
 }
 
+h2 {
+  font-weight: 400;
+}
+
 .hashtag {
   font-size: .9rem;
   color: #901c1c;
@@ -906,6 +910,7 @@ main {
   display: inline;
   float: left;
   margin-top: 0.5rem;
+  font-weight: 400;
 }
 
 @media (max-width: 450px) {
@@ -922,6 +927,9 @@ main {
   text-align: right;
   display: inline;
   float: right;
+  border: none;
+  background-color: white;
+  cursor: pointer;
   margin-top: 0.5rem;
 }
 

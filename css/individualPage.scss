@@ -260,6 +260,7 @@ main {
     display: inline;
     float: left;
     margin-top: 0.5rem;
+    font-weight: 400;
     @media (max-width: $mobileBreakpoint){
       font-size: 1.1rem;
       margin-left: .2rem;
@@ -272,6 +273,9 @@ main {
     text-align: right;
     display: inline;
     float: right;
+    border: none;
+    background-color: white;
+    cursor: pointer;
     margin-top: 0.5rem;
     @media (max-width: $mobileBreakpoint){
       font-size: 1.1rem;
