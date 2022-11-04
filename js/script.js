@@ -85,7 +85,7 @@ var Factory = function () {
         //add Content from object
         htmlThumbnailLink.href = this.createPageLink();
         htmlPhotographerImage.src =
-          "files/media/Photographers_ID_Photos/" + this.portrait;
+          "./files/media/Photographers_ID_Photos/" + this.portrait;
         htmlPhotographerImage.alt = "Photo of the Photographer " + this.name;
         htmlPhotographerName.textContent = this.name;
         htmlPhotographerLocation.textContent = this.city + ", " + this.country;
@@ -145,7 +145,7 @@ var Factory = function () {
           htmlPhotographerHashtagContainer.appendChild(tagsaver);
         }
         htmlPhotographerModalTitle.innerHTML = "Contact <br> " + self.name;
-        htmlPhotographerImage.src = "files/media/Photographers_ID_Photos/" + self.portrait;
+        htmlPhotographerImage.src = "./files/media/Photographers_ID_Photos/" + self.portrait;
         htmlPhotographerImage.title = "Portrait of " + self.name;
         htmlPhotographerImage.alt = "Portrait of " + self.name + " the photographer"
         htmlHeadTitle.innerHTML = self.name;
@@ -245,13 +245,13 @@ var Factory = function () {
       //add Content from Media Object
       if (extraThis.image !== undefined) {
         htmlMediaItem.src =
-          "files/media/" + extraThis.photographerId + "/" + extraThis.image;
+          "./files/media/" + extraThis.photographerId + "/" + extraThis.image;
         htmlMediaItem.alt = "A Photo tagged with " + extraThis.tags + " , called " + extraThis.title;
         
         htmlMediaItem.title = extraThis.title;
       } else {
         htmlMediaItem.src =
-          "files/media/" + extraThis.photographerId + "/" + extraThis.video;
+          "./files/media/" + extraThis.photographerId + "/" + extraThis.video;
         //htmlMediaItemImage.appendChild(htmlMediaItemImageSource);
         
         htmlMediaItem.title = extraThis.title;
@@ -318,7 +318,7 @@ var factory = new Factory();
 //reads json and fills the photographers Array with user data
 async function readJsonPhotographers() {
   // http://localhost:8080
-  const parsedData = await fetch("/files/FishEyeData.json")
+  const parsedData = await fetch("./files/FishEyeData.json")
     .then((response) => {
       if (!response.ok) {
         throw new Error("HTTP error " + response.status);
@@ -346,7 +346,7 @@ async function readJsonPhotographers() {
 //reads json and fills the media Array with media data
 async function readJsonMedia() {
   // http://localhost:8080
-  const parsedData = await fetch("/files/FishEyeData.json")
+  const parsedData = await fetch("./files/FishEyeData.json")
     .then((response) => {
       if (!response.ok) {
         throw new Error("HTTP error " + response.status);
